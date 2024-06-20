@@ -1,0 +1,25 @@
+.container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}

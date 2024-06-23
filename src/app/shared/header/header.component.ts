@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from '../token/token.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  username: string = '';
 
+  constructor(private tokenService: TokenService) {}
+
+  ngOnInit(): void {
+    this.username = this.tokenService.getUsername();
+  }
 }

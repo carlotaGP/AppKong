@@ -8,19 +8,22 @@ import { jwtDecode } from "jwt-decode";
 export class TokenService {
   token: string = '';
 
-  constructor() {    if (typeof localStorage !== 'undefined') {
+  constructor() {    
+    if (typeof localStorage !== 'undefined') {
     this.token = localStorage.getItem('token') || '';
-  } }
+    } 
+  }
 
- // Método genérico para decodificar el token y obtener un campo específico
- private decodeTokenField(field: string): string {
-  let valor: string = '';
-    if (this.token) {
-      const decodedToken: any = jwtDecode(this.token);
-      valor = decodedToken[field] || '';
-    }
-  return valor;
-}
+  // Método genérico para decodificar el token y obtener un campo específico
+  private decodeTokenField(field: string): string {
+    let valor: string = '';
+      if (this.token) {
+        const decodedToken: any = jwtDecode(this.token);
+        valor = decodedToken[field] || '';
+      }
+    return valor;
+  }
+
   getUsername(): string {
     if (typeof localStorage !== 'undefined') {
       this.token = localStorage.getItem('token') || '';
@@ -40,5 +43,17 @@ export class TokenService {
       this.token = localStorage.getItem('token') || '';
     }
     return this.token;
+  }
+
+  // Eliminar el token del almacenamiento local
+  clearToken(): void {
+    localStorage.removeItem('token');
+    this.token = '';
+  }
+
+  // Almacenar el token en el almacenamiento local
+  saveToken(token: string): void {
+    localStorage.setItem('token', token);
+    this.token = token;
   }
 }

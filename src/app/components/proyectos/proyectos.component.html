@@ -1,0 +1,24 @@
+<div class="contenedor">
+    <div class="centrar mt-5">
+        <app-calendario></app-calendario>   
+    </div>
+
+    <h1 class="display-6 text-center mt-4 mb-3">
+        Servicios
+    </h1>
+    <div class="lista">
+        <table class="table">
+            <tbody> 
+                <tr *ngFor="let proyecto of proyectos">
+                    <td>
+                        {{ proyecto.nombre }}  
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="w btn btn-warning mt-5" (click)="irOte()">
+        O . T . E
+    </button> 
+</div>

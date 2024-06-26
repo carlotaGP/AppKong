@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { TokenService } from '../../shared/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +16,17 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService,  private tokenService: TokenService) {}
 
   onLogin() {
     this.authService.login(this.username, this.password).subscribe(
       response => {
-        localStorage.setItem('token', response.token);
+        this.tokenService.saveToken(response.token);
         this.router.navigate(['/fichar-asistencia']); // Redirigir a la siguiente interfaz
       },
       error => {
         console.error('Error al iniciar sesión', error);
-        // Aquí podrías mostrar un mensaje de error al usuario si deseas
+        alert('Error al iniciar sesión.')
       }
     );
   }

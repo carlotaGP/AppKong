@@ -1,9 +1,18 @@
 const sql = require('mssql');
 const config = require('../config/dbConfig');
 
+let pool;
+
+const connectToDb = async () => {
+    if (!pool) {
+        pool = await sql.connect(config);
+    }
+    return pool;
+};
+
 const ficharEntrada = async (userId, date, horaEntrada) => {
     try {
-        let pool = await sql.connect(config);
+        const pool = await connectToDb();
 
         // Usar una consulta para obtener el nuevo ID
         let idResult = await pool.request().query(`SELECT MAX(id) AS maxId FROM CONTROL_ASISTENCIAS`);
@@ -13,7 +22,7 @@ const ficharEntrada = async (userId, date, horaEntrada) => {
             .input('id', sql.Int, id)
             .input('userId', sql.Int, userId)
             .input('fecha', sql.Date, date)
-            .input('horaEntrada', sql.DateTime, horaEntrada)
+            .input('horaEntrada',  sql.VarChar, horaEntrada)
             .query(`INSERT INTO CONTROL_ASISTENCIAS (id, id_usuario, fecha, hora_entrada) 
                     VALUES (@id, @userId, @fecha, @horaEntrada)`);
     } catch (error) {
@@ -24,10 +33,11 @@ const ficharEntrada = async (userId, date, horaEntrada) => {
 
 const ficharSalida = async (id, horaSalida) => {
     try {
-        let pool = await sql.connect(config);
+        const pool = await connectToDb();
+
         await pool.request()
             .input('id', sql.Int, id)
-            .input('horaSalida', sql.DateTime, horaSalida)
+            .input('horaSalida',  sql.VarChar, horaSalida)
             .query(`UPDATE CONTROL_ASISTENCIAS 
                     SET hora_salida = @horaSalida 
                     WHERE id = @id`);
@@ -39,7 +49,8 @@ const ficharSalida = async (id, horaSalida) => {
 
 const getPartesUsuarioFecha = async (userId, date) => {
     try {
-        let pool = await sql.connect(config);
+        const pool = await connectToDb();
+
         let result = await pool.request()
         .input('userId', sql.Int, userId)
         .input('date', sql.Date, date)
@@ -54,7 +65,8 @@ const getPartesUsuarioFecha = async (userId, date) => {
 
 const getParteAbierto = async (userId, date) => {
     try {
-        let pool = await sql.connect(config);
+        const pool = await connectToDb();
+        
         let result = await pool.request()
             .input('userId', sql.Int, userId)
             .input('date', sql.Date, date)

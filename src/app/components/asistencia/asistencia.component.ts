@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { AsistenciaService } from '../../services/asistencia/asistencia.service';
 import { TokenService } from '../../shared/token/token.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asistencia',
@@ -16,7 +17,7 @@ export class AsistenciaComponent {
   token: string = '';
   userId: string = '';
 
-  constructor(private asistenciaService: AsistenciaService, private tokenService: TokenService){}
+  constructor(private asistenciaService: AsistenciaService, private tokenService: TokenService, private router: Router){}
 
   ngOnInit(): void {
     this.getFechaSistema();
@@ -39,8 +40,6 @@ export class AsistenciaComponent {
           console.error('Error al obtener partes del usuario:', error);
         }
       );
-    }else{
-      console.warn('Debes seleccionar una fecha válida.');
     }
   }
 
@@ -52,11 +51,10 @@ export class AsistenciaComponent {
       response => {
         console.log(response.message);
         this.obtenerPartesUsuario();
-        // Manejar la respuesta del servidor según necesites
       },
       error => {
         console.error('Error al fichar entrada:', error);
-        // Manejar el error según necesites
+        alert('Error al fichar entrada. Ya ha fichado entrada antes, debe de fichar.');
       }
     );
   }
@@ -73,9 +71,13 @@ export class AsistenciaComponent {
         },
         error => {
           console.error('Error al fichar salida:', error);
-          // Manejar el error según necesites
+          alert('Error al fichar salida. Debe de fichar entrada primero.');
         }
       );
+  }
+
+  abrirServicios(): void{
+    this.router.navigate(['/proyectos']); // Redirigir a la siguiente interfaz
   }
 
   getFechaSistema(): void {
@@ -85,10 +87,5 @@ export class AsistenciaComponent {
     const yyyy = hoy.getFullYear();
 
     this.fechaSistema = `${dd}/${mm}/${yyyy}`;
-  }
-
-  formatearHora(hora: string): string {
-    const horaSinFecha = hora.substring(11, 16);
-    return horaSinFecha;
   }
 }

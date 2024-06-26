@@ -11,10 +11,7 @@ const ficharEntradaHandler = async (req, res) => {
         if (parteAbierto) {
             res.status(400).json({ message: 'Ya tienes un parte abierto para hoy. Debes fichar salida.' });
         } else {
-            const horaEntradaDate = convertHoraToDate(date, horaEntrada);
-            console.log(horaEntradaDate);
-
-            await ficharEntrada(userId, fecha, horaEntradaDate);
+            await ficharEntrada(userId, fecha, horaEntrada);
             res.status(201).json({ message: 'Fichado de entrada registrado correctamente.' });
         }
     } catch (error) {
@@ -34,10 +31,7 @@ const ficharSalidaHandler = async (req, res) => {
         if (!parteAbierto) {
             res.status(400).json({ message: 'No tienes un parte abierto para hoy. Debes fichar entrada primero.' });
         } else {
-            const horaSalidaDate = convertHoraToDate(date, horaSalida);
-            console.log(horaSalidaDate);
-
-            await ficharSalida(parteAbierto.id, horaSalidaDate);
+            await ficharSalida(parteAbierto.id, horaSalida);
             res.status(200).json({ message: 'Fichado de salida registrado correctamente.' });
         }
     } catch (error) {
@@ -49,6 +43,7 @@ const ficharSalidaHandler = async (req, res) => {
 const obtenerPartesUsuarioFecha = async (req, res) => {
     const userId = req.user.id; // Obtener el ID del usuario desde el token de autenticación
     const { date } = req.query; 
+    
     try {
         const fecha = formatFecha(date);
 
@@ -65,13 +60,6 @@ const obtenerPartesUsuarioFecha = async (req, res) => {
 const formatFecha = (fecha) => {
     const [dia, mes, anio] = fecha.split('/');
     return `${anio}-${mes}-${dia}`;
-};
-
-// Función para convertir una hora en formato 'HH:mm:ss' a un objeto Date
-const convertHoraToDate = (fecha, hora) => {
-    const [dia, mes, anio] = fecha.split('/');
-    const [horas, minutos, segundos] = hora.split(':');
-    return new Date(anio, mes - 1, dia, horas, minutos, segundos);
 };
 
 module.exports = {

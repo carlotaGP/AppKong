@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const asistenciaRoutes = require('./routes/asistenciaRoutes');
+const proyectosRoutes = require('./routes/proyectosRoutes');
 const authenticateToken = require('./middleware/authMiddleware');
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/asistencia', asistenciaRoutes);
+app.use('/api/proyectos', proyectosRoutes);
 app.get('/protected', authenticateToken, (req, res) => {
   res.json({ message: 'Acceso autorizado', user: req.user });
 });

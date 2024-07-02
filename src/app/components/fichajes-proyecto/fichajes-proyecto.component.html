@@ -1,39 +1,41 @@
 <div>
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-light" (click)="abrirServicios()">
-            Servicios
-            <img src="proximo.png" alt="">
-        </button>
-    </div>
-    <div class="centrar mt-2">
+    <h1 class="display-6 text-center mt-5 mb-3">
+        {{proyectoNombre}}
+    </h1>
+
+    <div class="centrar mt-3 mb-5">
         <label type="text" class="form-control mt-3 text-center" id="inputNoEditable" readonly>{{fechaSistema}}</label>
     </div>
 
-    <h1 class="display-6 text-center mt-5 mb-3">
-        Fichar asistencia
-    </h1>
     <div class="lista">
         <table class="table">
             <tbody class="text-center"> 
+                <tr>
+                    <td class="bg-light">
+                        Entrada
+                    </td>
+                    <td class="bg-light">
+                        Salida
+                    </td>
+                </tr>
+                <!--
                 <tr *ngFor="let parte of partesUsuario">
-                    <td>
+                    <td class="text-center">
                         {{ parte.hora_entrada }}  
                     </td>
-                    <td>
+                    <td class="text-center">
                         -
                     </td>
-                    <td>
+                    <td class="text-center">
                         {{ parte.hora_salida ? parte.hora_salida : '' }}                      
                     </td>
                 </tr>
+                -->
             </tbody>
         </table>
     </div>
 
-    <button class="w btn btn-primary mt-5" (click)="ficharEntrada()">
-        Fichar entrada
+    <button class="w btn btn-primary mt-5">
+        Fichar 
     </button> 
-    <button class="w btn btn-danger mb-3 mt-2" (click)="ficharSalida()">
-        Fichar salida
-    </button>
 </div>

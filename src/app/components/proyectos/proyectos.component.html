@@ -9,7 +9,7 @@
     <div class="lista">
         <table class="table">
             <tbody> 
-                <tr *ngFor="let proyecto of proyectos">
+                <tr *ngFor="let proyecto of proyectos" (click)="abrirFichajes(proyecto.nombre, proyecto.id)">
                     <td>
                         {{ proyecto.nombre }}  
                     </td>

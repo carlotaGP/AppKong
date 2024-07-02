@@ -68,6 +68,10 @@ export class ProyectosComponent implements OnInit {
       );
   }
 
+  abrirFichajes(proyectoNombre: string, proyectoId: number):void{
+    this.router.navigate(['/fichajesProyecto', proyectoNombre, proyectoId]);
+  }
+
   irOte(): void{
     this.router.navigate(['/ote']); // Redirigir a la siguiente interfaz
   }

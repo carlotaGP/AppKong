@@ -3,6 +3,7 @@ import { FicharAsistenciaComponent } from './pages/fichar-asistencia/fichar-asis
 import { LoginComponent } from './components/login/login.component';
 import { PageProyectosComponent } from './pages/page-proyectos/page-proyectos.component';
 import { PageOteComponent } from './pages/page-ote/page-ote.component';
+import { PageFichajesProyectoComponent } from './pages/page-fichajes-proyecto/page-fichajes-proyecto.component';
 
 export const routes: Routes = [
     {
@@ -21,5 +22,9 @@ export const routes: Routes = [
     {
         path: 'ote',
         component: PageOteComponent
+    },
+    {
+        path: 'fichajesProyecto/:nombre/:id',
+        component: PageFichajesProyectoComponent
     }
 ];

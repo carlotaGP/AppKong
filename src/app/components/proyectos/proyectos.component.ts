@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarioComponent } from '../calendario/calendario.component';
 import { FechaCalendarioService } from '../../shared/fecha/fecha-calendario.service';
-import { IdProyectosService } from '../../services/idProyectos/id-proyectos.service';
+import { IdProyectosService } from '../../services/proyectos/id-proyectos.service';
 import { TokenService } from '../../shared/token/token.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -61,8 +61,6 @@ export class ProyectosComponent implements OnInit {
       .subscribe(
         data => {
           this.proyectos = data;
-          console.log('token', this.token);
-          console.log('Proyectos obtenidos:', this.proyectos);
         },
         (error) => {
           console.error('Error al obtener proyectos por IDs:', error);

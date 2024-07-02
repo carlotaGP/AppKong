@@ -29,4 +29,10 @@ export class IdProyectosService {
     const body = { ids };
     return this.http.post<any[]>(`${this.baseUrl}/proyectos`, body, { headers});
   }
+
+  crearProyecto(nombre: string, observaciones: string, id_cliente: number, fechaCalendario: string, token: string): Observable<any> {
+    const headers = this.createHeaders(token); 
+    const body = { nombre, observaciones, id_cliente, fechaCalendario };
+    return this.http.post<any>(`${this.baseUrl}/crear-proyectos`, body, { headers});
+  }
 }

@@ -1,1 +1,21 @@
-<p>ote works!</p>
+<div>
+    <h1 class="display-6 text-center mt-5 mb-5">
+        Orden de trabajo extraordinaria
+    </h1>
+    <form action="" (ngSubmit)="agregarProyecto()">
+        <label for="cliente" class="form-label">Cliente</label>
+        <select class="form-select mb-4" name="cliente" id="cliente" [(ngModel)]="id_cliente">
+            <!-- lista de clientes -->
+            <option disabled>Selecciona un cliente</option>
+            <option *ngFor="let cliente of clientes" [value]="cliente.id"> {{ cliente.nombre }} </option>
+        </select>
+    
+        <label for="servicio" class="form-label">Servicio</label>
+        <input class="form-control mb-4" id="servicio" [(ngModel)]="nombre" name="nombre">
+        
+        <label for="descripcion" class="form-label">Observaciones</label>
+        <textarea class="form-control" id="descripcion" rows="3" [(ngModel)]="observaciones" name="observaciones"></textarea>
+    
+        <button type="submit" class="btn btn-primary mt mb-3">Ingresar O . T . E</button>
+    </form>
+</div>
